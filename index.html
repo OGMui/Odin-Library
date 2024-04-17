@@ -11,11 +11,11 @@
         <div class="header">
             <h1>Book Library</h1>
             <!--add new book button-->
-            <button id="add-book">Add Book</button>
+            <button id="add-book-btn">Add Book</button>
             <!---toggle dark mode-->
-            <button id="dark-mode">Dark Mode</button>
+            <button id="dark-mode-btn">Dark Mode</button>
         </div>
-        <dialog>
+        <dialog id="add-book-modal">
             <form>
                 <label for="title">Title</label>
                 <input type="text" id="title" name="title" required>
@@ -25,7 +25,7 @@
                 <input type="number" id="pages" name="pages" required>
                 <label for="read">Read</label>
                 <input type="checkbox" id="read" name="read">
-                <button type="submit">Add Book</button>
+                <button type="submit" id="submit-add-book">Add Book</button>
             </form>
         </dialog>
         <div class="book-list">
@@ -38,6 +38,6 @@
             </table>
         </div>
     </div>
-    
+    <script src="./scripts.js"></script>
 </body>
 </html>
