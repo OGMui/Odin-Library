@@ -1,0 +1,56 @@
+:root{
+    --color-background:#FFF;
+    --color-buttons1:#FF0000;
+    --color-buttons2:#00FF00;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+button {
+    background-image: linear-gradient(to bottom, var(--color-buttons1), var(--color-buttons2));
+    color: var(--color-background);
+    width: 100px;
+    margin: 10px;
+}
+
+body {
+    background-color: var(--color-background);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-content: space-evenly;
+    height: 100vh;
+    border: 1px solid black;
+}
+
+.header {
+    font-size: 2em;
+    margin-bottom: 20px;
+    display: flex;
+    flex-grow: 0;
+    align-items: center;
+    border: 1px solid black;
+    
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+    width: 100%;
+}
+th{
+    background-color: var(--color-buttons1);
+    color: var(--color-background);
+}
