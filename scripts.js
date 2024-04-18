@@ -7,31 +7,116 @@ const pages = document.getElementById("pages");
 const read = document.getElementById("read");
 const bookModal = document.getElementById("add-book-modal");
 const submitAddBookBtn = document.getElementById("submit-add-book");
+const tableContent = document.getElementById("table-content");
+const tableHeaders = document.getElementById("table-headers");
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
 
 // Variables
-let Mylibrary = [];
+let myLibrary = [
+    {title: "The Capybara Encyclopedia", author: "Capybara", pages: 100, read: true},
+    {title: "Capybara: The Ultimate Guide", author: "Capybara", pages: 200, read: false},
+];
 
 // Event Listeners
-addBookBtn.addEventListener("click", openAddBookModal);
+addBookBtn.addEventListener("click", () => {
+    bookModal.showModal();
+    console.log("addbookbtn clicked");
+});
+
+submitAddBookBtn.addEventListener("click", (event) => {
+    addBookToLibrary();
+    console.log("submitAddBookBtn clicked");
+    console.log(myLibrary);
+    event.preventDefault();
+    bookModal.close();
+   
+});
+
+darkModeBtn.addEventListener("click", () => {
+    // If the color-mode is currently "light"...
+    if (document.documentElement.getAttribute("color-mode") === "light") {
+        // Change the color-mode to "dark"
+        document.documentElement.setAttribute("color-mode", "dark");
+    } else {
+        // Otherwise, change the color-mode to "light"
+        document.documentElement.setAttribute("color-mode", "light");
+    }
+});
+
+updateLibrary();
 
 
 function Book (title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
-    this.read = false;
+    this.read = read;
     this.info = function() {
         return `${title} by ${author}, ${pages}, ${read ? "read" : "not read yet"}` 
     }
 }
 
-const openAddBookModal = () => {
-    bookModal.showModal();
-}
 
 function addBookToLibrary() {
-    let title = 
+   myLibrary.push(new Book(title.value, author.value, pages.value, read.checked));
+   updateLibrary();
+   console.log(read.checked)
+  
 }
 
 let book1 = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
 console.log(book1.info());
+
+function updateLibrary() {
+    // Clear the table first
+    tableContent.innerHTML = "";
+
+    myLibrary.forEach(book => {
+        let bookRow = document.createElement("tr");
+        bookRow.setAttribute("id", `${book.title}`);
+
+        let bookTitle = document.createElement("td");
+        bookTitle.textContent = book.title;
+        bookRow.appendChild(bookTitle);
+
+        let bookAuthor = document.createElement("td");
+        bookAuthor.textContent = book.author;
+        bookRow.appendChild(bookAuthor);
+
+        let bookPages = document.createElement("td");
+        bookPages.textContent = book.pages;
+        bookRow.appendChild(bookPages);
+
+        let bookRead = document.createElement("td");
+        let readBtn = document.createElement("button");
+        if (book.read) {
+            readBtn.innerText = "read";
+            readBtn.style.backgroundColor = "green";
+        } else if (!book.read) { 
+            readBtn.innerText = "not read";
+            readBtn.style.backgroundColor = "red";
+        }
+        readBtn.addEventListener("click", () => {
+            book.read = !book.read;
+            updateLibrary();
+        });
+        //bookRead.textContent = book.read ? "Read" : "Not read yet";
+        bookRead.appendChild(readBtn);
+        bookRow.appendChild(bookRead);
+
+        let bookDelete = document.createElement("td");
+        let deleteBtn = document.createElement("button")
+        deleteBtn.setAttribute("id", "delete-btn");
+        deleteBtn.textContent = "❌";
+        deleteBtn.addEventListener("click", () => {
+            myLibrary = myLibrary.filter(b => b.title !== book.title);
+            updateLibrary();
+        });
+        bookDelete.appendChild(deleteBtn);
+        bookRow.appendChild(bookDelete);
+
+        document.getElementById("table-content").appendChild(bookRow);
+    });
+}
+
