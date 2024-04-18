@@ -10,12 +10,13 @@ const submitAddBookBtn = document.getElementById("submit-add-book");
 const tableContent = document.getElementById("table-content");
 const tableHeaders = document.getElementById("table-headers");
 const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
-
+const closeModal = document.getElementById("close-modal");
 
 // Variables
 let myLibrary = [
     {title: "The Capybara Encyclopedia", author: "Capybara", pages: 100, read: true},
     {title: "Capybara: The Ultimate Guide", author: "Capybara", pages: 200, read: false},
+    {title: "Life of a Capybara: Collectors Addition", author: "Capybara", pages: 200, read: false},
 ];
 
 // Event Listeners
@@ -33,16 +34,25 @@ submitAddBookBtn.addEventListener("click", (event) => {
    
 });
 
+closeModal.addEventListener("click", () => bookModal.close());
+
+if (prefersDarkScheme.matches) {
+    darkModeBtn.textContent = "Light Mode";
+}
 darkModeBtn.addEventListener("click", () => {
     // If the color-mode is currently "light"...
     if (document.documentElement.getAttribute("color-mode") === "light") {
         // Change the color-mode to "dark"
         document.documentElement.setAttribute("color-mode", "dark");
+        darkModeBtn.textContent = "Light Mode";
     } else {
         // Otherwise, change the color-mode to "light"
         document.documentElement.setAttribute("color-mode", "light");
+        darkModeBtn.textContent = "Dark Mode";
     }
 });
+
+
 
 updateLibrary();
 
@@ -69,7 +79,7 @@ let book1 = new Book("The Hobbit", "J.R.R. Tolkien", 295, true);
 console.log(book1.info());
 
 function updateLibrary() {
-    // Clear the table first
+    
     tableContent.innerHTML = "";
 
     myLibrary.forEach(book => {
@@ -90,12 +100,13 @@ function updateLibrary() {
 
         let bookRead = document.createElement("td");
         let readBtn = document.createElement("button");
+        readBtn.setAttribute("id", "read-btn");
         if (book.read) {
-            readBtn.innerText = "read";
-            readBtn.style.backgroundColor = "green";
+            readBtn.innerText = "Read";
+            readBtn.style.backgroundColor = "#007665";
         } else if (!book.read) { 
-            readBtn.innerText = "not read";
-            readBtn.style.backgroundColor = "red";
+            readBtn.innerText = "Not Read";
+            readBtn.style.backgroundColor = "#C0564A";
         }
         readBtn.addEventListener("click", () => {
             book.read = !book.read;
