@@ -1,15 +1,45 @@
-:root{
+:root[color-mode="light"] {
     --color-background:#FFF;
     --color-buttons1:#FF0000;
     --color-buttons2:#00FF00;
+    --font-color: #000;
     font-family: 'Times New Roman', Times, serif;
 }
 
-button {
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-background: #000;
+        --color-buttons1: #00FF00;
+        --color-buttons2: #FF0000;
+        --header-color: #FFF;
+        --font-color: #FFF;
+        
+    }
+}
+
+* {
+    color: var(--font-color);
+}
+button#add-book-btn, button#dark-mode-btn {
     background-image: linear-gradient(to bottom, var(--color-buttons1), var(--color-buttons2));
     color: var(--color-background);
     width: 100px;
     margin: 10px;
+}
+
+dialog {
+    background-color: var(--color-background); 
+}
+
+
+button#delete-btn {
+    background-color: var(--color-background);
+    background-image: none;
+    border: none;
+    color: var(--color-background);
+    width: 50px;
+    margin: 0px;
+    cursor: pointer;
 }
 
 body {
@@ -26,7 +56,7 @@ body {
     flex-direction: column;
     align-content: space-evenly;
     height: 100vh;
-    border: 1px solid black;
+    border: 1px solid var(--font-color);
 }
 
 .header {
@@ -35,7 +65,7 @@ body {
     display: flex;
     flex-grow: 0;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid var(--font-color);
     
 }
 
@@ -45,7 +75,7 @@ table {
 }
 
 th, td {
-    border: 1px solid black;
+    border: 1px solid var(--font-color);
     padding: 8px;
     text-align: center;
     width: 100%;
