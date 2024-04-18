@@ -1,43 +1,143 @@
 :root[color-mode="light"] {
-    --color-background:#FFF;
-    --color-buttons1:#FF0000;
-    --color-buttons2:#00FF00;
-    --font-color: #000;
-    font-family: 'Times New Roman', Times, serif;
+    --color-background:#FFF98F;
+    --color-background2: #C7A63F;
+    --color-buttons1:#826900;
+    --color-buttons2:#2A0200;
+    --font-color: #2A0200;
+    
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --color-background: #000;
-        --color-buttons1: #00FF00;
-        --color-buttons2: #FF0000;
+        --color-background: #2A0200;
+        --color-background2: #351D00;
+        --color-buttons1: #826900;
+        --color-buttons2: #351D00;
         --header-color: #FFF;
-        --font-color: #FFF;
+        --font-color: #FFF98F;
         
     }
 }
 
 * {
     color: var(--font-color);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    
+}
+
+h1 {
+    
+    margin: 10px 0px 0px 0px;
+    padding: 0px;
+}
+
+#buttons {
+    display: flex;
+    justify-content:space-around;
+    margin: 10px;
+    width: 100%;
+
 }
 button#add-book-btn, button#dark-mode-btn {
     background-image: linear-gradient(to bottom, var(--color-buttons1), var(--color-buttons2));
     color: var(--color-background);
-    width: 100px;
+    width: 120px;
     margin: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    border-style: hidden;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 dialog {
     background-color: var(--color-background); 
+    
+}
+
+dialog > div {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1px;
+    background-color: var(--color-background);
+}
+
+dialog > div > button#close-modal {
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--color-background);
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 700;
+    padding: 0px;
+    margin: 0px;
+    border-radius: 10px;
+    background-image: linear-gradient(to bottom, var(--color-buttons1), var(--color-buttons2));
+    height: 1.7em;
+    width: 1.6em;
+    display: inline;
+}
+
+button#close-modal:hover {
+    background-image: linear-gradient(to bottom, var(--color-buttons2), var(--color-buttons1));
+    color:#FFF98F;
+}
+
+dialog::backdrop {
+    opacity: 0.9;
+    background-color: var(--color-background);
+    filter: blur(5px);
+}
+
+dialog form > label {
+    
+    margin: 14px;
+    padding: px;
+}
+
+dialog form > input {
+    display: block;
+    margin: 14px;
+    padding: 10px;
+    color: var(--color-background);
+    background-color: var(--font-color);
+}
+
+dialog form > input#read {
+    display: inline;
+    padding: 5px;
+    margin: 5px;
+}
+
+dialog > form > button {
+    background-image: linear-gradient(to bottom, var(--color-buttons1), var(--color-buttons2));
+    color: var(--color-background);
+    width: 100px;
+    height: 40px;
+    margin: 10px;
+    cursor: pointer;
+    display: block;
+}
+button#read-btn{
+    padding: 10px;
+    margin: 10px;
+    width: 80px;
+    cursor: pointer;
+    border-radius: 10px;
+    border-style: none;
+    font-weight: 600;
 }
 
 
 button#delete-btn {
-    background-color: var(--color-background);
+    background-color:rgba(100, 0, 0, 0)  ;
     background-image: none;
     border: none;
     color: var(--color-background);
-    width: 50px;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
     margin: 0px;
     cursor: pointer;
 }
@@ -56,31 +156,61 @@ body {
     flex-direction: column;
     align-content: space-evenly;
     height: 100vh;
-    border: 1px solid var(--font-color);
+    /* border: 1px solid var(--font-color); */
 }
 
 .header {
     font-size: 2em;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
     display: flex;
     flex-grow: 0;
     align-items: center;
-    border: 1px solid var(--font-color);
+    flex-direction: column;
+    /* border: 1px solid var(--font-color); */
     
 }
 
 table {
+    border: hidden;
     border-collapse: collapse;
     width: 100%;
+    margin-top: 10px;
+    box-shadow: 0px 14px 17px var(--color-buttons2);
+    
 }
 
 th, td {
-    border: 1px solid var(--font-color);
-    padding: 8px;
-    text-align: center;
+    border: 1px solid var(--color-buttons1);
+    padding: 10px;
+    
+    text-align: left;
     width: 100%;
+    
 }
 th{
     background-color: var(--color-buttons1);
+    color: var(--color-background);
+    font-size: 1.2em;
+    text-align: left;
+    /* padding: 5px; */
+    padding-right: 20px;
+    padding-left: 5px;
+    border: 2.5px solid var(--color-background);
+    border-bottom: 2.5px solid var(--color-buttons1)    ;
+}
+
+th:nth-child(1) {
+
+    border-radius: 20px 0 0 0;
+    padding-left: 10px;
+}
+
+th:nth-child(5){
+    border-radius: 0 20px 0 0;
+
+
+}
+tr:nth-child(even) {
+    background-color: var(--color-background2);
     color: var(--color-background);
 }
